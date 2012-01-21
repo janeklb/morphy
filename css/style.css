@@ -1,0 +1,36 @@
+/* For modern browsers */
+.cf:before,
+.cf:after {
+    content:"";
+    display:table;
+}
+
+.cf:after {
+    clear:both;
+}
+
+/* For IE 6/7 (trigger hasLayout) */
+.cf {
+    zoom:1;
+}
+
+
+.chessBoard {
+	width: 640px;
+	height: 640px;
+}
+
+.row {
+	width: 640px;
+}
+.square {
+	width: 60px;
+	height: 60px;
+	float: left;
+	padding: 9px;
+	border: 1px solid #000000;
+}
+.square.black { background-color: #564646; }
+.square.white { background-color: #E0DBBE; }
+
+.piece { width: 40px; height: 40px; padding: 10px; cursor: pointer; font-size: 32px; }

@@ -1,0 +1,12 @@
+<script src="js/constants.js"></script>
+<script src="js/board.js"></script>
+<script src="js/piece.js"></script>
+<script src="js/functions.js"></script>
+<script>	
+	var cMorphy = new ChessBoard();
+</script>
+
+FEN: <input type="text" id="fen" value="rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 0" style="width:400px;" /> <input type="button" value="Load FEN" onclick="loadFEN(document.getElementById('fen').value);"> <input type="button" value="Grab FEN" onclick="grabFEN();" />
+<br />
+Move from: <input type="text" id="from" maxlength="2" /> to: <input type="text" id="to" maxlength="2" /> <input type="button" value="Move" onclick="doMove();">
+<pre id="chessboard" style="font-size:24px;"></pre>
