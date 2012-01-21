@@ -43,8 +43,7 @@ function jQueryChessBoard(elementId) {
 				$(ui.draggable).appendTo(this);
 				
 				var piece = $(ui.draggable).data('piece');
-				
-				var oldPiece = chessBoard.setPiece(piece, $(this).data('row'), $(this).data('file'));
+				chessBoard.setPiece(piece, $(this).data('row'), $(this).data('file'));
 				
 			} else {
 				$(ui.draggable).data('reset', true);
