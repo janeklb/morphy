@@ -11,8 +11,8 @@ function jQueryChessBoard(elementId) {
 		
 		for (var f = 0, $cell, piece, $piece; f < 8; f++) {
 			$cell = $('<div class="square" />');
-			$cell.addClass((++i % 2 == 0) ? 'black' : 'white');
-			$cell.addClass('square_' + FILES[f] + ROWS[r]);
+			$cell.addClass((++i % 2 == 0) ? 'white' : 'black');
+			$cell.attr('id', FILES[f] + ROWS[r]);
 			$cell.data({row: r, file: f});
 			
 			// add pieces
@@ -68,7 +68,7 @@ function jQueryChessBoard(elementId) {
 				validMoves = piece.validMoves(chessBoard);
 			
 			$(validMoves).each(function(index, move) {
-				$('.square_' + FILES[move[1]] + ROWS[move[0]]).addClass('active');
+				$('#' + FILES[move[1]] + ROWS[move[0]]).addClass('active');
 			});
 		},
 		stop: function(event, ui) {
