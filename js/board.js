@@ -332,7 +332,7 @@ ChessBoard.prototype.getFEN = function() {
 /**
  * Indicates whether a piece is being attacked by anything
  * @param ChessPiece piece
- * @return false if no piece is attacking, a ChessPiece object of the first piece found to be attacking otherwise
+ * @return null if no piece is attacking, a ChessPiece object of the first piece found to be attacking otherwise
  */
 ChessBoard.prototype.pieceIsAttacked = function(piece) {
 	return this.squareIsAttacked(piece.row, piece.file, piece.colour == 'w' ? 'b' : 'w');
@@ -343,7 +343,7 @@ ChessBoard.prototype.pieceIsAttacked = function(piece) {
  * @param integer row the row of the square
  * @param integer file the file of the square
  * @param string colour the colour of the attacker
- * @return false if no piece is attacking, a ChessPiece object of the first piece found to be attacking otherwise
+ * @return null if no piece is attacking, a ChessPiece object of the first piece found to be attacking otherwise
  */
 ChessBoard.prototype.squareIsAttacked = function(row, file, colour) {
 
@@ -351,7 +351,7 @@ ChessBoard.prototype.squareIsAttacked = function(row, file, colour) {
 	var direction = colour == 'w' ? 1 : -1;
 	var squares = [[row - direction, file + 1], [row - direction, file - 1]];
 	var i = squares.length;
-	var piece = false;
+	var piece = null;
 	while (i--) {
 		piece = this.getPieceSafe(squares[i][0], squares[i][1]);
 		if (piece && piece.colour == colour && piece.type == 'p') {
@@ -399,7 +399,7 @@ ChessBoard.prototype.squareIsAttacked = function(row, file, colour) {
 ChessBoard.prototype.getPieceInDirection = function(row, file, direction) {
 	
 	var distance = 0;
-	var piece = false;
+	var piece = null;
 	
 	while (++distance <= 8) {
 		piece = this.getPieceSafe(row + direction[0] * distance, file + direction[1] * distance);
