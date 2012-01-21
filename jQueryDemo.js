@@ -13,6 +13,7 @@ function jQueryChessBoard(elementId) {
 			$cell = $('<div class="square" />');
 			$cell.addClass((++i % 2 == 0) ? 'black' : 'white');
 			$cell.addClass('square_' + FILES[f] + ROWS[r]);
+			$cell.data({row: r, file: f});
 			
 			// add pieces
 			if (piece = chessBoard.getPiece(r, f)) {
@@ -34,14 +35,20 @@ function jQueryChessBoard(elementId) {
 	
 	$('.square').droppable({
 		accept: '.piece',
-		activate: function(event, ui) {
-			
-		},
-		deactivate: function(event, ui) {
-//			console.log(ui);
-		},
-		drop: function() {
-			
+		drop: function(event, ui) {
+			if ($(this).hasClass('active')) {
+				$(ui.draggable).css({top:0,left:0});
+				
+				$(this).children().remove();
+				$(ui.draggable).appendTo(this);
+				
+				var piece = $(ui.draggable).data('piece');
+				
+				var oldPiece = chessBoard.setPiece(piece, $(this).data('row'), $(this).data('file'));
+				
+			} else {
+				$(ui.draggable).data('reset', true);
+			}
 		}
 	});
 	
@@ -50,8 +57,16 @@ function jQueryChessBoard(elementId) {
 			var piece = $(this).data('piece'),
 				validMoves = piece.validMoves(chessBoard);
 			
-			console.log(validMoves);
-			
+			$(validMoves).each(function(index, move) {
+				$('.square_' + FILES[move[1]] + ROWS[move[0]]).addClass('active');
+			});
+		},
+		stop: function(event, ui) {
+			$('.square').removeClass('active');
+			if ($(this).data('reset')) {
+				$(this).removeData('reset');
+				$(this).css(ui.originalPosition);
+			}
 		}
 	});
 }
