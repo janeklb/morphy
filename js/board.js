@@ -165,34 +165,42 @@ ChessBoard.prototype.validTextCoordinate = function(coordinate) {
 		return false;
 	}
 	
-	return this.validCoordinate(row, file);
+	return this.validCoordinate({row: row, file: file});
 };
 
 /**
  * 
- * @param row
- * @param file
+ * @param coord a coordinate object
  * @return
  */
-ChessBoard.prototype.validCoordinate = function(row, file) {
+ChessBoard.prototype.validCoordinate = function(coord) {
 	
-	if (row > 7 || row < 0 || file > 7 || file < 0) {
+	if (typeof coord != 'object' || 
+			typeof coord.row == 'undefined' ||
+			typeof coord.file == 'undefined') {
 		return false;
 	}
 	
-	return {'file':file, 'row':row};
+	if (coord.row > 7 || coord.row < 0 || coord.file > 7 || coord.file < 0) {
+		return false;
+	}
+	
+	return coord;
 };
 
 /**
  * Moves a piece
- * @param string from the text coordinate of the piece (eg. d3)
- * @param string to the text coordinate of the pieces destination
+ * @param string|object from the text coordinate of the piece (eg. d3) or an object containing row & file properties
+ * @param string|object to   the destination square (as above)
  * @return
  */
 ChessBoard.prototype.doMove = function(from, to) {
 	
-	var f = this.validTextCoordinate(from);
-	var t = this.validTextCoordinate(to);
+	var f = typeof from == 'string' ?
+				this.validTextCoordinate(from) : this.validCoordinate(from);
+				
+	var t = typeof to == 'string' ?
+				this.validTextCoordinate(to) : this.validCoordinate(to);
 	
 	if (!f || !t) {
 		throw 'Invalid moves from: ' + from + ' to: ' + to;
@@ -460,7 +468,7 @@ ChessBoard.prototype.setPiece = function(piece, row, file, do_callback) {
  * @return ChessPiece
  */
 ChessBoard.prototype.getPiece = function(row, file) {
-	if (!this.validCoordinate(row, file)) {
+	if (!this.validCoordinate({row: row, file: file})) {
 		throw 'Invalid coordinates ' + file + row;
 	}
 	

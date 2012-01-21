@@ -19,6 +19,8 @@ function jQueryChessBoard(elementId) {
 			if (piece = chessBoard.getPiece(r, f)) {
 				$piece = $('<div class="piece" />');
 				$piece.addClass(piece.type);
+				$piece.addClass(piece.colour);
+				
 				$piece.html(piece.piece);
 				$piece.data('piece', piece);
 				
@@ -43,7 +45,16 @@ function jQueryChessBoard(elementId) {
 				$(ui.draggable).appendTo(this);
 				
 				var piece = $(ui.draggable).data('piece');
-				chessBoard.setPiece(piece, $(this).data('row'), $(this).data('file'));
+				
+				chessBoard.doMove({
+					row: piece.row,
+					file: piece.file
+				}, {
+					row: $(this).data('row'),
+					file: $(this).data('file')
+				});
+				
+				setActivePieces();
 				
 			} else {
 				$(ui.draggable).data('reset', true);
@@ -68,6 +79,14 @@ function jQueryChessBoard(elementId) {
 			}
 		}
 	});
+	
+	function setActivePieces() {
+		var active = chessBoard.activecolour;
+		$('.piece').draggable('disable');
+		$('.piece.' + active).draggable('enable');
+	}
+	
+	setActivePieces();
 }
 
 $(document).ready(function() {
