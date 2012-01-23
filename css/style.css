@@ -35,4 +35,18 @@
 .square.black.active { background-color: #A56868; }
 .square.white.active { background-color: #F7DDDC; }
 .square.active { border: 1px solid #ff0000; }
-.piece { width: 40px; height: 40px; padding: 10px; cursor: move; font-size: 32px; }
+
+.piece {
+	width: 40px;
+	height: 40px;
+	padding: 12px 10px 8px;
+	cursor: move;
+	font-size: 24px;
+	border-radius: 40px;
+	-moz-border-radius: 40px;
+	-webkit-border-radius: 40px;
+	text-align: center;
+	vertical-align: middle;
+}
+.piece.colour_w { background-color: #fff; color: #000;}
+.piece.colour_b { background-color: #000; color: #fff;}

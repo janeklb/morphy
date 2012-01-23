@@ -19,7 +19,7 @@ function jQueryChessBoard(elementId) {
 			if (piece = chessBoard.getPiece(r, f)) {
 				$piece = $('<div class="piece" />');
 				$piece.addClass(piece.type);
-				$piece.addClass(piece.colour);
+				$piece.addClass('colour_' + piece.colour);
 				
 				$piece.html(piece.piece);
 				$piece.data('piece', piece);
@@ -83,7 +83,7 @@ function jQueryChessBoard(elementId) {
 	function setActivePieces() {
 		var active = chessBoard.activecolour;
 		$('.piece').draggable('disable');
-		$('.piece.' + active).draggable('enable');
+		$('.piece.colour_' + active).draggable('enable');
 	}
 	
 	setActivePieces();
