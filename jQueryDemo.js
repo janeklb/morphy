@@ -4,6 +4,7 @@ function jQueryChessBoard(elementId) {
 	var chessBoard = new ChessBoard();
 	
 	var $chessBoard = $('#' + elementId);
+	$chessBoard.children().remove();
 	
 	for (var r = 0, i = 0, $row; r < 8; r++) {
 		
@@ -54,6 +55,8 @@ function jQueryChessBoard(elementId) {
 					file: $(this).data('file')
 				});
 				
+				$('#FENLog').append(chessBoard.getFEN() + "\n");
+				
 				setActivePieces();
 				
 			} else {
@@ -90,6 +93,5 @@ function jQueryChessBoard(elementId) {
 }
 
 $(document).ready(function() {
-
-	var x = new jQueryChessBoard('chessBoard');
+	new jQueryChessBoard('chessBoard');
 });

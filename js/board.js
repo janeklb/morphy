@@ -251,6 +251,8 @@ ChessBoard.prototype.doMove = function(from, to) {
 		alert('Check from ' + checkingPiece.piece);
 		
 		// TODO: found check -- now search for checkmate!
+		// var validMoves = king.validMoves(this);
+		
 	}
 	
 	// increment move count after black moves
